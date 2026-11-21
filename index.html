@@ -197,9 +197,9 @@
 </head>
 <body class="antialiased">
 
-    <!-- Floating Navigation Pill -->
-    <nav class="fixed top-6 left-0 right-0 z-50 px-4 md:px-0">
-        <div class="max-w-5xl mx-auto glass-nav rounded-full px-6 py-4 flex justify-between items-center">
+    <!-- Floating Navigation Pill (z-100 to stay above mobile menu) -->
+    <nav class="fixed top-6 left-0 right-0 z-[100] px-4 md:px-0 pointer-events-none">
+        <div class="max-w-5xl mx-auto glass-nav rounded-full px-6 py-4 flex justify-between items-center pointer-events-auto">
             <a href="#" class="text-2xl tracking-tighter text-white">darshh<span class="text-accent">.</span></a>
             
             <!-- Desktop Links -->
@@ -215,21 +215,15 @@
                 <a href="https://wa.me/91XXXXXXXXXX" target="_blank" class="hidden md:flex items-center gap-2 btn-frosted btn-shine rounded-full px-5 py-2 text-sm uppercase tracking-widest">
                     <i class="ph ph-whatsapp-logo text-lg text-green-400"></i> Chat
                 </a>
-                <button id="menu-toggle" class="text-white hover:text-accent transition-colors z-[60]">
+                <button id="menu-toggle" class="text-white hover:text-accent transition-colors">
                     <i class="ph ph-list text-3xl"></i>
                 </button>
             </div>
         </div>
     </nav>
 
-    <!-- Fullscreen App-like Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 z-[70] flex flex-col py-10 px-6 overflow-y-auto">
-        <div class="max-w-md mx-auto w-full flex justify-end mb-8">
-            <button id="close-menu-btn" class="text-white hover:text-accent transition-colors bg-white/5 px-6 py-3 rounded-full flex items-center gap-2 border border-white/10 shadow-lg uppercase text-xs tracking-widest font-bold">
-                <span>Close</span>
-                <i class="ph ph-x text-xl"></i>
-            </button>
-        </div>
+    <!-- Fullscreen App-like Mobile Menu (z-[90] so it sits under the navbar) -->
+    <div id="mobile-menu" class="fixed inset-0 z-[90] flex flex-col pt-32 px-6 overflow-y-auto">
         <div class="flex flex-col gap-2 max-w-md mx-auto w-full pb-12">
             <a href="#" class="mobile-link nav-link">
                 <i class="ph ph-house text-2xl text-accent"></i>
@@ -421,7 +415,7 @@
     </section>
 
     <!-- FULLSCREEN PROJECT MODAL (Cream Theme) -->
-    <div id="project-modal" class="fixed inset-0 z-[100] modal-cream overflow-y-auto hidden flex-col">
+    <div id="project-modal" class="fixed inset-0 z-[110] modal-cream overflow-y-auto hidden flex-col">
         
         <!-- Modal Header -->
         <div class="sticky top-0 z-10 modal-cream border-b border-gray-300 px-6 py-4 flex justify-between items-center">
@@ -601,7 +595,6 @@
     <script>
         // Mobile Menu Toggle
         const menuToggle = document.getElementById('menu-toggle');
-        const closeMenuBtn = document.getElementById('close-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const navLinks = document.querySelectorAll('.nav-link');
         const menuIcon = menuToggle.querySelector('i');
@@ -626,7 +619,6 @@
         }
 
         menuToggle.addEventListener('click', toggleMenu);
-        if (closeMenuBtn) closeMenuBtn.addEventListener('click', toggleMenu);
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 if(isMenuOpen) toggleMenu();
